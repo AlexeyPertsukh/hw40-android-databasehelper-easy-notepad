@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_back"
+        android:icon="@drawable/ic_baseline_arrow_back_64"
+        android:orderInCategory="1"
+        android:title="Back"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/menu_save_note"
+        android:icon="@drawable/ic_baseline_check_64"
+        android:orderInCategory="2"
+        android:title="Save note"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/menu_delete_note"
+        android:icon="@drawable/ic_baseline_delete_outline_64"
+        android:orderInCategory="3"
+        android:title="Delete note"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/menu_git"
+        android:icon="@drawable/github_64"
+        android:orderInCategory="5"
+        android:title="Github"
+        app:showAsAction="always"
+        />
+
+</menu>

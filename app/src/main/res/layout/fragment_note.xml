@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etNoteName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Title"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:saveEnabled="false"
+        android:layout_marginLeft="10sp"
+        />
+
+    <EditText
+        android:id="@+id/etNoteMemo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="top|start"
+        android:hint="Text"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:saveEnabled="false"
+        android:layout_marginLeft="10sp"
+        />
+
+    <TextView
+        android:id="@+id/tvNoteDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="date and time"
+        android:layout_marginLeft="10sp"
+        />
+
+</LinearLayout>

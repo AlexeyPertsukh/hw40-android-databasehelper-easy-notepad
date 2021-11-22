@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/drawable/draw_toast.xml" value="0.1" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/drawable/ic_baseline_add_64.xml" value="0.1" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.1" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.1" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/drawable/ic_baseline_sort_24.xml" value="0.1" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/layout/activity_main.xml" value="0.2907608695652174" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/layout/custom_toast.xml" value="0.20885416666666667" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/layout/filter_dialog.xml" value="0.271286231884058" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/layout/fragment_filter.xml" value="0.20885416666666667" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/layout/fragment_items.xml" value="0.28442028985507245" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/layout/fragment_note.xml" value="0.28442028985507245" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/layout/fragment_sort.xml" value="0.20885416666666667" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/layout/item_layout.xml" value="0.28442028985507245" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/menu/main_menu.xml" value="0.20989583333333334" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/menu/menu_items_fragment.xml" value="0.2296875" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/menu/menu_main.xml" value="0.20885416666666667" />
+        <entry key="..\:/MyProg/Android/hw40-notebook/app/src/main/res/menu/menu_note_fragment.xml" value="0.20885416666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
