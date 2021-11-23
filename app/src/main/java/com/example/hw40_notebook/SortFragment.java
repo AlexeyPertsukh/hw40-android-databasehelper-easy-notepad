@@ -127,9 +127,7 @@ public class SortFragment extends Fragment implements Serializable, IConst, IToa
     }
 
     private void saveSortToShared(DatabaseHelper.SORT sort) {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_DATA, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(SHARED_SORT_NAME, sort.name());
-        editor.apply();
+        MySharedPreferences mySharedPreferences = MySharedPreferences.getInstance(getContext());
+        mySharedPreferences.putString(SHARED_SORT_NAME, sort.name());
     }
 }

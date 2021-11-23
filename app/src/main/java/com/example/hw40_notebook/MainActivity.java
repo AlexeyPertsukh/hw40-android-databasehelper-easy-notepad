@@ -24,12 +24,14 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
     private SortFragment sortFragment;
     private FragmentContainerView fcMain;
 
+    MySharedPreferences mySharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initViews();
+        initSharedPreferences();
         initDatabaseHelper();
         initFragments();
         showItemsFragment();
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
 
     private void initViews() {
         fcMain = findViewById(R.id.fcMain);
+    }
+
+    private void initSharedPreferences() {
+        mySharedPreferences = MySharedPreferences.getInstance(getApplicationContext());
     }
 
     private void initDatabaseHelper() {
@@ -156,8 +162,7 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
     }
 
     private DatabaseHelper.SORT readSortFromShared() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_DATA, Context.MODE_PRIVATE);
-        String name = sharedPreferences.getString(SHARED_SORT_NAME, DatabaseHelper.DEFAULT_SORT.name());
+        String name = mySharedPreferences.getString(SHARED_SORT_NAME,DatabaseHelper.DEFAULT_SORT.name());
         return DatabaseHelper.SORT.valueOf(name);
     }
 }
