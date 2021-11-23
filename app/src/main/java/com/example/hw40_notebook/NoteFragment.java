@@ -72,7 +72,7 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
     }
 
     private void initCursor() {
-        if(noteId < 0) {
+        if(isNewNote()) {
             return;
         }
         cursor = databaseHelper.getCursorNoteById(database, noteId);
@@ -93,7 +93,7 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
     }
 
     private void addToEditText() {
-        if(noteId < 0) {
+        if(isNewNote()) {
             clearTexts();
             return;
         }
@@ -119,7 +119,7 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
         String name = etNoteName.getText().toString();
         String memo = etNoteMemo.getText().toString();
 
-        if(noteId > 0) {
+        if(isEditNote()) {
             databaseHelper.updateItemById(database, noteId, name, memo);
         } else {
             databaseHelper.insertItem(database, name, memo);
@@ -140,10 +140,9 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
     }
 
     private void deleteNote(DialogInterface dialogInterface, int i) {
-        if(noteId < 1) {
-            return;
+        if(isEditNote()) {
+            databaseHelper.deleteItemById(database, noteId);
         }
-        databaseHelper.deleteItemById(database, noteId);
         shortToast(getContext(), "Note deleted");
         iChangeFragment.showItemsFragment();
     }
@@ -172,6 +171,14 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
 
     private void back() {
         iChangeFragment.showItemsFragment();
+    }
+
+    private boolean isNewNote() {
+        return noteId < 1;
+    }
+
+    private boolean isEditNote() {
+        return !isNewNote();
     }
 
 }

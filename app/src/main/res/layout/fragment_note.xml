@@ -9,18 +9,20 @@
     <EditText
         android:id="@+id/etNoteName"
         android:hint="Title"
-        style="@style/StyleEditText"
+        style="@style/StyleMainEditText"
         android:inputType="textPersonName"
         android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
         />
 
     <EditText
         android:id="@+id/etNoteMemo"
         android:hint="Text"
-        style="@style/StyleEditText"
+        style="@style/StyleMainEditText"
         android:gravity="top|start"
         android:inputType="textMultiLine"
         android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
         />
 
     <TextView

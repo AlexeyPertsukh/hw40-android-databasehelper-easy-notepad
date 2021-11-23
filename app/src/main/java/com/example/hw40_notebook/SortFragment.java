@@ -1,7 +1,6 @@
 package com.example.hw40_notebook;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;

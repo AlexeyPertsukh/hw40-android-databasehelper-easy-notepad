@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
     public static final String ITEM_TITLE = "title";
     public static final String ITEM_DATE_TIME = "dt";
     public static final String ITEM_MEMO = "memo";
-    private static final int VERSION = 18;
+    private static final int VERSION = 19;
 
     public static SORT DEFAULT_SORT = SORT.EDIT_OLD;
     public static FILTER DEFAULT_FILTER = FILTER.NONE;
@@ -65,10 +65,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
         cv.put(ITEM_TITLE, title);
         cv.put(ITEM_MEMO, memo);
         cv.put(ITEM_DATE_TIME, dt);
-        int updCount = db.update(DatabaseHelper.TAB_ITEMS, cv
+        return db.update(DatabaseHelper.TAB_ITEMS, cv
                 , DatabaseHelper.ITEM_ID + "=?"
                 , new String[]{String.valueOf(itemId)});
-        return updCount;
     }
 
     public int updateItemById(SQLiteDatabase db, long itemId, String title, String memo) {
@@ -174,6 +173,10 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
 
     public void setFilter(FILTER filter) {
         this.filter = filter;
+    }
+
+    public boolean isFiltered() {
+        return filter != FILTER.NONE;
     }
 
 }

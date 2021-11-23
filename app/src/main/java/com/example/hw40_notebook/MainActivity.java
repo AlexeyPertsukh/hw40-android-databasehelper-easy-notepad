@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,11 +28,16 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        changeStatusBarColor();
         initViews();
         initSharedPreferences();
         initDatabaseHelper();
         initFragments();
         showItemsFragment();
+    }
+
+    private void changeStatusBarColor() {
+        getWindow().setStatusBarColor(getResources().getColor(R.color.black));
     }
 
     private void initViews() {

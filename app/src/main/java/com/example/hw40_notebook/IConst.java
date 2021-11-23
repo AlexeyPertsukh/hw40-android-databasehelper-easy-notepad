@@ -1,4 +1,5 @@
 package com.example.hw40_notebook;
+//подборка пастельных цветов: https://awdee.ru/podborka-pastelnyh-tsvetov-ot-color-thisislosko/
 
 public interface IConst {
     String KEY_DATABASE_HELPER = "key_database_helper";

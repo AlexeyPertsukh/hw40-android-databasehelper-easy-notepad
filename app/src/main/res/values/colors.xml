@@ -8,7 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="gray">#717070</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="title_background">#1B501E</color>
-    <color name="note_background">#F4EEB9</color>
+    <color name="red">#ED1313</color>
+    <color name="orange">#FF5722</color>
+    <color name="yellow">#FFC107</color>
+    <color name="green">#1B501E</color>
+    <color name="title_background">#01685E</color>
+    <color name="note_background">#FFFADD</color>
+    <color name="settings_background">#FFFADD</color>
     <color name="main_text_color">#3D3D3C</color>
 </resources>

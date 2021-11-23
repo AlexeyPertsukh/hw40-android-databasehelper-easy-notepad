@@ -8,14 +8,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="StyleDateTimeText">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/gray</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="StyleEditText">
+    <style name="StyleMainEditText">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/main_text_color</item>
         <item name="android:layout_width">match_parent</item>
@@ -24,6 +17,15 @@
         <item name="android:minHeight">48sp</item>
         <item name="android:ems">10</item>
     </style>
+
+
+    <style name="StyleDateTimeText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 
     <style name="StyleRadioGroup">
         <item name="android:layout_marginTop">10sp</item>

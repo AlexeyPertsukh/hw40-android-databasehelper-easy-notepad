@@ -30,6 +30,7 @@ public class ItemsFragment extends Fragment implements Serializable, IToast, IBa
     private SQLiteDatabase database;
     private Cursor cursor;
     private SimpleCursorAdapter itemsAdapter;
+    private MenuItem miFilter;
 
     private IChangeFragment iChangeFragment;
     private IGit iGit;
@@ -62,15 +63,23 @@ public class ItemsFragment extends Fragment implements Serializable, IToast, IBa
 
             initDatabase();
             initCursor();
-            initAdapter(view);
+            initAdapter();
 
             lvItems.setAdapter(itemsAdapter);
             initLvListener();
         }
 
         setHasOptionsMenu(true);
-
+//        changeFilterIcon();
         return view;
+    }
+
+    private void changeFilterIcon() {
+        if (databaseHelper.isFiltered()) {
+            miFilter.setIcon(R.drawable.ic_baseline_filter_list_64_green);
+        } else {
+            miFilter.setIcon(R.drawable.ic_baseline_filter_list_64_white);
+        }
     }
 
     private void readArguments() {
@@ -88,10 +97,9 @@ public class ItemsFragment extends Fragment implements Serializable, IToast, IBa
     }
 
 
-    private void initAdapter(View view) {
+    private void initAdapter() {
         String[] headers = new String[]{DatabaseHelper.ITEM_TITLE, DatabaseHelper.ITEM_DATE_TIME};
         itemsAdapter = new SimpleCursorAdapter(getContext(),
-//                android.R.layout.two_line_list_item,
                 R.layout.custom_two_line_list_item,
                 cursor,
                 headers,
@@ -116,6 +124,8 @@ public class ItemsFragment extends Fragment implements Serializable, IToast, IBa
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_items_fragment, menu);
+        miFilter = menu.getItem(2);
+        changeFilterIcon();
         super.onCreateOptionsMenu(menu, inflater);
     }
 

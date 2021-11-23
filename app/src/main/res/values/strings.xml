@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">hw40-notebook</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="MainTextSize">20sp</string>
+    <string name="menu_item_back">Back</string>
+    <string name="menu_item_add_note">Add note</string>
+    <string name="menu_item_filter">Filter</string>
+    <string name="menu_item_sort">Sort</string>
+    <string name="menu_item_github">Github</string>
+    <string name="menu_item_save_note">Save note</string>
+    <string name="menu_item_delete_note">Delete note</string>
 </resources>
