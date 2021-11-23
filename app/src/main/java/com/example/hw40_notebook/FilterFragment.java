@@ -94,7 +94,7 @@ public class FilterFragment extends Fragment implements Serializable, IConst, IT
         }
         DatabaseHelper.FILTER filter = mapRbFilter.get(compoundButton);
         databaseHelper.setFilter(filter);
-//        databaseHelper.notifyAll();
+        saveFilterToShared(filter);
 
         String message = "Filter " + compoundButton.getText().toString().toLowerCase(Locale.ROOT);
         shortToast(getContext(), message);
@@ -110,12 +110,15 @@ public class FilterFragment extends Fragment implements Serializable, IConst, IT
         rbFilterToday = view.findViewById(R.id.rbFilterToday);
     }
 
-
-
     private void setRbCheck() {
         DatabaseHelper.FILTER filter = databaseHelper.getFilter();
         RadioButton rb = mapIntFilter.get(filter);
         assert rb != null;
         rb.setChecked(true);
+    }
+
+    private void saveFilterToShared(DatabaseHelper.FILTER filter) {
+        MySharedPreferences mySharedPreferences = MySharedPreferences.getInstance(getContext());
+        mySharedPreferences.putString(SHARED_FILTER_NAME, filter.name());
     }
 }

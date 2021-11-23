@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
 
     private void initDatabaseHelper() {
         DatabaseHelper.SORT sort = readSortFromShared();
-        databaseHelper = DatabaseHelper.of(this, sort);
+        DatabaseHelper.FILTER filter = readFilterFromShared();
+        databaseHelper = DatabaseHelper.of(this, sort, filter);
     }
 
     private void initFragments() {
@@ -161,8 +162,16 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
         startActivity(Browse);
     }
 
+
     private DatabaseHelper.SORT readSortFromShared() {
         String name = mySharedPreferences.getString(SHARED_SORT_NAME,DatabaseHelper.DEFAULT_SORT.name());
         return DatabaseHelper.SORT.valueOf(name);
     }
+
+    private DatabaseHelper.FILTER readFilterFromShared() {
+        String name = mySharedPreferences.getString(SHARED_FILTER_NAME,DatabaseHelper.DEFAULT_FILTER.name());
+        return DatabaseHelper.FILTER.valueOf(name);
+    }
+
+
 }

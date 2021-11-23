@@ -31,14 +31,14 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
     private FILTER filter;
 
 
-    private DatabaseHelper(Context context, SORT sort) {
+    private DatabaseHelper(Context context, SORT sort, FILTER filter) {
         super(context, DATABASE_NAME, null, VERSION);
         this.sort = sort;
-        filter = DEFAULT_FILTER;
+        this.filter = filter;
     }
 
-    public static DatabaseHelper of(Context context, SORT sort) {
-        return new DatabaseHelper(context, sort);
+    public static DatabaseHelper of(Context context, SORT sort, FILTER filter) {
+        return new DatabaseHelper(context, sort, filter);
     }
 
     @Override
