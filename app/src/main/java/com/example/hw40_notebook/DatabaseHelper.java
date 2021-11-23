@@ -22,17 +22,23 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
     public static final String ITEM_DATE_TIME = "dt";
     public static final String ITEM_MEMO = "memo";
 
+    public static SORT DEFAULT_SORT = SORT.EDIT_OLD;
+    public static FILTER DEFAULT_FILTER = FILTER.NONE;
+
+    private static final int VERSION = 18;
+
     private SORT sort;
     private FILTER filter;
 
 
-
-    private static final int VERSION = 18;
-
-    public DatabaseHelper(Context context) {
+    private DatabaseHelper(Context context, SORT sort) {
         super(context, DATABASE_NAME, null, VERSION);
-        sort = SORT.EDIT_OLD;
-        filter = FILTER.NONE;
+        this.sort = sort;
+        filter = DEFAULT_FILTER;
+    }
+
+    public static DatabaseHelper of(Context context, SORT sort) {
+        return new DatabaseHelper(context, sort);
     }
 
     @Override
@@ -122,7 +128,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
         return db.rawQuery(query, null);
     }
 
-    public enum FILTER{
+    public enum FILTER {
         NONE(""),
         MONTH("WHERE " + ITEM_DATE_TIME + " > date('now','-1 month')"),
         WEEK("WHERE " + ITEM_DATE_TIME + " > date('now','-7 day')"),
@@ -140,7 +146,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
         }
     }
 
-    public enum SORT{
+    public enum SORT {
         EDIT_OLD("ORDER BY " + ITEM_DATE_TIME + " ASC"),
         EDIT_NEW("ORDER BY " + ITEM_DATE_TIME + " DESC"),
         ORDER_OLD("ORDER BY " + ITEM_ID + " ASC"),
@@ -175,4 +181,5 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
     public void setFilter(FILTER filter) {
         this.filter = filter;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.example.hw40_notebook;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -109,11 +110,11 @@ public class SortFragment extends Fragment implements Serializable, IConst, IToa
         }
         DatabaseHelper.SORT sort = mapRbSort.get(compoundButton);
         databaseHelper.setSort(sort);
+        saveSortToShared(sort);
 
         String message = "Sort by " + compoundButton.getText().toString().toLowerCase(Locale.ROOT);
         shortToast(getContext(), message);
         iChangeFragment.showItemsFragment();
-
     }
 
     private void initViews(View view) {
@@ -123,5 +124,12 @@ public class SortFragment extends Fragment implements Serializable, IConst, IToa
         rbSortEditOld = view.findViewById(R.id.rbSortEditOld);
         rbSortTitleHi = view.findViewById(R.id.rbSortTitleHi);
         rbSortTitleLo = view.findViewById(R.id.rbSortTitleLo);
+    }
+
+    private void saveSortToShared(DatabaseHelper.SORT sort) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_DATA, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SHARED_SORT_NAME, sort.name());
+        editor.apply();
     }
 }

@@ -135,9 +135,6 @@ public class ItemsFragment extends Fragment implements Serializable, IToast, IBa
         return super.onOptionsItemSelected(item);
     }
 
-    private void openGit() {
-    }
-
     private void filter() {
         iChangeFragment.showFilterFragment();
     }

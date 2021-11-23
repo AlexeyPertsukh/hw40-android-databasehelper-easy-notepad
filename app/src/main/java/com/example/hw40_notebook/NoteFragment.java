@@ -174,5 +174,4 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
         iChangeFragment.showItemsFragment();
     }
 
-
 }

@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
         setContentView(R.layout.activity_main);
 
         initViews();
-        initDatabase();
+        initDatabaseHelper();
         initFragments();
         showItemsFragment();
     }
@@ -35,8 +39,9 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
         fcMain = findViewById(R.id.fcMain);
     }
 
-    private void initDatabase() {
-        databaseHelper = new DatabaseHelper(this);
+    private void initDatabaseHelper() {
+        DatabaseHelper.SORT sort = readSortFromShared();
+        databaseHelper = DatabaseHelper.of(this, sort);
     }
 
     private void initFragments() {
@@ -146,6 +151,13 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
 
     @Override
     public void gitOpen() {
+        Intent Browse = new Intent(Intent.ACTION_VIEW, Uri.parse(GIT_URL));
+        startActivity(Browse);
+    }
 
+    private DatabaseHelper.SORT readSortFromShared() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_DATA, Context.MODE_PRIVATE);
+        String name = sharedPreferences.getString(SHARED_SORT_NAME, DatabaseHelper.DEFAULT_SORT.name());
+        return DatabaseHelper.SORT.valueOf(name);
     }
 }
