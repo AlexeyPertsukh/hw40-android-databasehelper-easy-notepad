@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import org.jetbrains.annotations.NotNull;
 
-public class MainActivity extends AppCompatActivity implements IChangeFragment, IConst, IToast, IBasicDialog, IGit {
+public class MainActivity extends AppCompatActivity implements IChangeFragment, IConst, IToast, ILog, IBasicDialog, IGit {
 
     private DatabaseHelper databaseHelper;
 
@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
                 .beginTransaction()
                 .replace(R.id.fcMain, noteFragment)
                 .commit();
-
     }
 
     @Override
@@ -109,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
                 .commit();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -122,19 +120,15 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
         if(id == R.id.menu_back) {
             back();
         } else if(id == R.id.menu_git) {
-            openGit();
+            gitOpen();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void openGit() {
     }
 
 
     private void back() {
         showItemsFragment();
     }
-
 
     private void showEndDialog() {
         String message = "Do you want to exit the program?";
@@ -152,16 +146,10 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
     public void gitOpen() {
         Intent Browse = new Intent(Intent.ACTION_VIEW, Uri.parse(GIT_URL));
         startActivity(Browse);
     }
-
 
     private DatabaseHelper.SORT readSortFromShared() {
         String name = mySharedPreferences.getString(SHARED_SORT_NAME,DatabaseHelper.DEFAULT_SORT.name());
@@ -172,6 +160,5 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
         String name = mySharedPreferences.getString(SHARED_FILTER_NAME,DatabaseHelper.DEFAULT_FILTER.name());
         return DatabaseHelper.FILTER.valueOf(name);
     }
-
 
 }

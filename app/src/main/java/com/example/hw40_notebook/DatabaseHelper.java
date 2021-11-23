@@ -21,15 +21,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
     public static final String ITEM_TITLE = "title";
     public static final String ITEM_DATE_TIME = "dt";
     public static final String ITEM_MEMO = "memo";
+    private static final int VERSION = 18;
 
     public static SORT DEFAULT_SORT = SORT.EDIT_OLD;
     public static FILTER DEFAULT_FILTER = FILTER.NONE;
 
-    private static final int VERSION = 18;
-
     private SORT sort;
     private FILTER filter;
-
 
     private DatabaseHelper(Context context, SORT sort, FILTER filter) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -49,19 +47,18 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
                 ITEM_DATE_TIME,
                 ITEM_MEMO);
         db.execSQL(query);
-        insertItem(db, "note1", "note test1",  "2021-05-10 11:02");
-        insertItem(db, "note2", "note test2",  "2021-11-10 10:05");
-        insertItem(db, "one more note3", "note test3",  "2021-11-15 21:46");
-        insertItem(db, "note4", "note test4",  "2021-11-20 11:01");
+        insertItem(db, "note1", "note test1", "2021-05-10 11:02");
+        insertItem(db, "note2", "note test2", "2021-11-10 10:05");
+        insertItem(db, "one more note3", "note test3", "2021-11-15 21:46");
+        insertItem(db, "note4", "note test4", "2021-11-20 11:01");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion,  int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String query = "DROP TABLE IF EXISTS " + TAB_ITEMS;
         db.execSQL(query);
         onCreate(db);
     }
-
 
     public int updateItemById(SQLiteDatabase db, long itemId, String title, String memo, String dt) {
         ContentValues cv = new ContentValues();
@@ -70,9 +67,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
         cv.put(ITEM_DATE_TIME, dt);
         int updCount = db.update(DatabaseHelper.TAB_ITEMS, cv
                 , DatabaseHelper.ITEM_ID + "=?"
-                , new String[] { String.valueOf(itemId)});
+                , new String[]{String.valueOf(itemId)});
         return updCount;
-
     }
 
     public int updateItemById(SQLiteDatabase db, long itemId, String title, String memo) {
@@ -86,7 +82,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
                 title, memo, dt);
 
         db.execSQL(query);
-
     }
 
     public void insertItem(SQLiteDatabase db, String title, String memo) {
@@ -152,8 +147,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
         ORDER_OLD("ORDER BY " + ITEM_ID + " ASC"),
         ORDER_NEW("ORDER BY " + ITEM_ID + " DESC"),
         TITLE_LO("ORDER BY " + ITEM_TITLE + " ASC"),
-        TITLE_HI("ORDER BY " + ITEM_TITLE + " DESC")
-        ;
+        TITLE_HI("ORDER BY " + ITEM_TITLE + " DESC");
 
         private final String query;
 
@@ -170,12 +164,12 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
         return sort;
     }
 
-    public void setSort(SORT sort) {
-        this.sort = sort;
-    }
-
     public FILTER getFilter() {
         return filter;
+    }
+
+    public void setSort(SORT sort) {
+        this.sort = sort;
     }
 
     public void setFilter(FILTER filter) {

@@ -1,50 +1,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:text="SORT"
+        style="@style/StyleMainText"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="10sp"
+        />
 
     <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10sp"
-        android:layout_marginTop="10sp"
+        style="@style/StyleRadioGroup"
         >
-
 
         <RadioButton
             android:id="@+id/rbSortEditOld"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit date: old first" />
+            style="@style/StyleMainText"
+            android:text="Edit date: old first"
+            />
 
         <RadioButton
             android:id="@+id/rbSortEditNew"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/StyleMainText"
             android:text="Edit date: new first" />
 
         <RadioButton
             android:id="@+id/rbSortOrderOld"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/StyleMainText"
             android:text="Create order: old first" />
 
         <RadioButton
             android:id="@+id/rbSortOrderNew"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/StyleMainText"
             android:text="Create order: new first" />
 
         <RadioButton
             android:id="@+id/rbSortTitleLo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Title:  A  - Z" />
+            style="@style/StyleMainText"
+            android:text="Title:  A - Z" />
 
         <RadioButton
             android:id="@+id/rbSortTitleHi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/StyleMainText"
             android:text="Title: Z - A" />
 
 

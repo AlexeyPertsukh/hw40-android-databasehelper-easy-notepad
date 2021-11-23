@@ -62,7 +62,7 @@ public class ItemsFragment extends Fragment implements Serializable, IToast, IBa
 
             initDatabase();
             initCursor();
-            initAdapter();
+            initAdapter(view);
 
             lvItems.setAdapter(itemsAdapter);
             initLvListener();
@@ -88,10 +88,11 @@ public class ItemsFragment extends Fragment implements Serializable, IToast, IBa
     }
 
 
-    private void initAdapter() {
+    private void initAdapter(View view) {
         String[] headers = new String[]{DatabaseHelper.ITEM_TITLE, DatabaseHelper.ITEM_DATE_TIME};
         itemsAdapter = new SimpleCursorAdapter(getContext(),
-                android.R.layout.two_line_list_item,
+//                android.R.layout.two_line_list_item,
+                R.layout.custom_two_line_list_item,
                 cursor,
                 headers,
                 new int[]{android.R.id.text1, android.R.id.text2},

@@ -2,39 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/note_background"
+    >
 
     <EditText
         android:id="@+id/etNoteName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
         android:hint="Title"
+        style="@style/StyleEditText"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:saveEnabled="false"
         android:layout_marginLeft="10sp"
         />
 
     <EditText
         android:id="@+id/etNoteMemo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="top|start"
         android:hint="Text"
+        style="@style/StyleEditText"
+        android:gravity="top|start"
         android:inputType="textMultiLine"
-        android:minHeight="48dp"
-        android:saveEnabled="false"
         android:layout_marginLeft="10sp"
         />
 
     <TextView
         android:id="@+id/tvNoteDateTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="date and time"
-        android:layout_marginLeft="10sp"
+        style="@style/StyleDateTimeText"
+        android:layout_marginLeft="15sp"
         />
 
 </LinearLayout>
