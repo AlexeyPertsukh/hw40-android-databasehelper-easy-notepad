@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
     public static final String ITEM_TITLE = "title";
     public static final String ITEM_DATE_TIME = "dt";
     public static final String ITEM_MEMO = "memo";
-    private static final int VERSION = 19;
+    private static final int VERSION = 20;
 
     public static SORT DEFAULT_SORT = SORT.EDIT_OLD;
     public static FILTER DEFAULT_FILTER = FILTER.NONE;
