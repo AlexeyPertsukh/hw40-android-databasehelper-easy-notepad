@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/menu_back"
-        android:icon="@drawable/ic_baseline_arrow_back_64"
-        android:orderInCategory="1"
-        android:title="@string/menu_item_back"
-        app:showAsAction="always"
-        />
-
+    <!-- при изменении пунктов меню, изменить в ItemsFragment строку, добавить соответствующий индекс: miFilter = menu.getItem(2); -->
     <item
         android:id="@+id/menu_add_note"
         android:icon="@drawable/ic_baseline_add_64"
-        android:orderInCategory="2"
+        android:orderInCategory="1"
         android:title="@string/menu_item_add_note"
         app:showAsAction="always"
         />
@@ -21,7 +13,7 @@
     <item
         android:id="@+id/menu_filter"
         android:icon="@drawable/ic_baseline_filter_list_64_white"
-        android:orderInCategory="3"
+        android:orderInCategory="2"
         android:title="@string/menu_item_filter"
         app:showAsAction="always"
         />
@@ -29,7 +21,7 @@
     <item
         android:id="@+id/menu_sort"
         android:icon="@drawable/ic_baseline_sort_by_alpha_64"
-        android:orderInCategory="4"
+        android:orderInCategory="3"
         android:title="@string/menu_item_sort"
         app:showAsAction="always"
         />
@@ -37,7 +29,7 @@
     <item
         android:id="@+id/menu_git"
         android:icon="@drawable/github_64"
-        android:orderInCategory="5"
+        android:orderInCategory="4"
         android:title="@string/menu_item_github"
         app:showAsAction="always"
         />

@@ -124,7 +124,7 @@ public class ItemsFragment extends Fragment implements Serializable, IToast, IBa
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_items_fragment, menu);
-        miFilter = menu.getItem(2);
+        miFilter = menu.getItem(1); //Filter, чтобы менять иконку
         changeFilterIcon();
         super.onCreateOptionsMenu(menu, inflater);
     }
