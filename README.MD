@@ -10,7 +10,7 @@ Features of the program code:
 - Items sorting and filtering
 - Change color menu item icon on set filter
 
-![alt text](big_app_logo.png)
+![alt text](app_ic_enote.png)
 
 ![alt text](Screenshot_1.jpg)
 
