@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, ILog {
@@ -23,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
     public static final String ITEM_TITLE = "title";
     public static final String ITEM_DATE_TIME = "dt";
     public static final String ITEM_MEMO = "memo";
-    private static final int VERSION = 20;
+    private static final int VERSION = 21;
 
     public static SORT DEFAULT_SORT = SORT.EDIT_OLD;
     public static FILTER DEFAULT_FILTER = FILTER.NONE;
@@ -49,10 +50,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
                 ITEM_DATE_TIME,
                 ITEM_MEMO);
         db.execSQL(query);
-        insertItem(db, "note1", "note test1", "2021-05-10 11:02");
-        insertItem(db, "note2", "note test2", "2021-11-10 10:05");
-        insertItem(db, "one more note3", "note test3", "2021-11-15 21:46");
-        insertItem(db, "note4", "note test4", "2021-11-20 11:01");
+
+        List<Note> notes = DefaultItems.getNotes();
+        insertItemsFromList(db, notes);
     }
 
     @Override
@@ -77,7 +77,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
     }
 
     public void insertItem(SQLiteDatabase db, String title, String memo, String dt) {
-
         String query = String.format("INSERT INTO items(%s, %s, %s) VALUES('%s','%s','%s')",
                 ITEM_TITLE, ITEM_MEMO, ITEM_DATE_TIME,
                 title, memo, dt);
@@ -88,6 +87,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
     public void insertItem(SQLiteDatabase db, String title, String memo) {
         insertItem(db, title, memo, getStringCurrentDateTime());
     }
+
+    public void insertItemsFromList(SQLiteDatabase db, List<Note> notes) {
+        for (Note note : notes) {
+            insertItem(db, note.title, note.memo, note.dt);
+        }
+    }
+
 
     private String getStringCurrentDateTime() {
         Date currentDate = new Date();
