@@ -1,4 +1,4 @@
-package com.example.hw40_notebook;
+package com.example.constants;
 //подборка пастельных цветов: https://awdee.ru/podborka-pastelnyh-tsvetov-ot-color-thisislosko/
 
 public interface IConst {

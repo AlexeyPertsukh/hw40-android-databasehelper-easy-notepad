@@ -3,15 +3,16 @@ package com.example.hw40_notebook;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentManager;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.constants.IConst;
+import com.example.model.DatabaseHelper;
+import com.example.model.MySharedPreferences;
 import com.example.util.IBasicDialog;
 import com.example.util.ILog;
 import com.example.util.IToast;

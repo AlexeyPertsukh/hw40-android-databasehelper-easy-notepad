@@ -1,4 +1,4 @@
-package com.example.hw40_notebook;
+package com.example.model;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
