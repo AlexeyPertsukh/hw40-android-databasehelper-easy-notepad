@@ -18,19 +18,27 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.util.IBasicDialog;
+import com.example.util.ILog;
+import com.example.util.IToast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
 public class NoteFragment extends Fragment implements Serializable, IToast, IBasicDialog, ILog, IConst {
-    
-    private EditText etNoteName;
+
+    private static final String KEY_TITLE_SELECT_START = "key_title_select_start";
+    private static final String KEY_TITLE_SELECT_END = "key_title_select_end";
+    private static final String KEY_MEMO_SELECT_START = "key_memo_select_start";
+    private static final String KEY_MEMO_SELECT_END = "key_memo_select_end";
+
+    private EditText etNoteTitle;
     private EditText etNoteMemo;
     private TextView tvDateTime;
 
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase database;
-    private Cursor cursor;
 
     private IChangeFragment iChangeFragment;
     private IGit iGit;
@@ -39,7 +47,6 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
 
     public NoteFragment() {
     }
-
 
     @Override
     public void onAttach(@NonNull @NotNull Context context) {
@@ -51,40 +58,83 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        printLog("NoteFragment - Create: " + toString());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_note, container, false);
+        printLog("NoteFragment - CreateView");
+
         initView(view);
         initListeners();
 
-        if(getArguments() != null) {
-            noteId = (Long) getArguments().getLong(KEY_NOTE_ID);
-            initDatabase();
-            initCursor();
-            addToEditText();
+        if(savedInstanceState != null) {
+            loadFromSaveInstance(savedInstanceState);
+        } else if(getArguments() != null) {
+            loadFromArguments();
         }
 
         setHasOptionsMenu(true);
+
         return view;
     }
 
-    private void initCursor() {
-        if(isNewNote()) {
-            return;
-        }
-        cursor = databaseHelper.getCursorNoteById(database, noteId);
+    private void loadFromArguments() {
+        assert getArguments() != null;
+        noteId = getArguments().getLong(KEY_NOTE_ID);
+        databaseHelper = (DatabaseHelper) getArguments().getSerializable(KEY_DATABASE_HELPER);
+        assert databaseHelper != null;
+        database = databaseHelper.getWritableDatabase();
+        Cursor cursor = databaseHelper.getCursorNoteById(database, noteId);
+        addToEditText(cursor);
     }
 
-    private void initDatabase() {
-        databaseHelper = (DatabaseHelper) getArguments().getSerializable(KEY_DATABASE_HELPER);
+    private void loadFromSaveInstance(Bundle bundle) {
+        printLog("NoteFragment - read savedInstanceState: title = " + bundle.getString("title"));
+        databaseHelper = (DatabaseHelper) bundle.getSerializable(KEY_DATABASE_HELPER);
+        assert databaseHelper != null;
         database = databaseHelper.getWritableDatabase();
+
+        noteId = bundle.getLong(DatabaseHelper.ITEM_ID);
+        String title = bundle.getString(DatabaseHelper.ITEM_TITLE);
+        String memo =  bundle.getString(DatabaseHelper.ITEM_MEMO);
+        String dt  =  bundle.getString(DatabaseHelper.ITEM_DATE_TIME);
+
+        addToEditText(title, memo, dt);
+        setEtSelection(bundle);
+    }
+
+    private void setEtSelection(Bundle bundle) {
+        int titleSelectStart = bundle.getInt(KEY_TITLE_SELECT_START);
+        int titleSelectEnd = bundle.getInt(KEY_TITLE_SELECT_END);
+        int memoSelectStart = bundle.getInt(KEY_MEMO_SELECT_START);
+        int memoSelectEnd = bundle.getInt(KEY_MEMO_SELECT_END);
+
+        etNoteTitle.setSelection(titleSelectStart, titleSelectEnd);
+        etNoteMemo.setSelection(memoSelectStart, memoSelectEnd);
+    }
+
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(DatabaseHelper.ITEM_TITLE, etNoteTitle.getText().toString());
+        outState.putString(DatabaseHelper.ITEM_MEMO, etNoteMemo.getText().toString());
+        outState.putString(DatabaseHelper.ITEM_DATE_TIME, tvDateTime.getText().toString());
+        outState.putLong(DatabaseHelper.ITEM_ID, noteId);
+        outState.putSerializable(KEY_DATABASE_HELPER, databaseHelper);
+        outState.putInt(KEY_TITLE_SELECT_START, etNoteTitle.getSelectionStart());
+        outState.putInt(KEY_TITLE_SELECT_END, etNoteTitle.getSelectionEnd());
+        outState.putInt(KEY_MEMO_SELECT_START, etNoteMemo.getSelectionStart());
+        outState.putInt(KEY_MEMO_SELECT_END, etNoteMemo.getSelectionEnd());
+
+        printLog("noteFragment - onSaveInstanceState");
     }
 
     private void initView(View view) {
-        etNoteName = view.findViewById(R.id.etNoteName);
+        etNoteTitle = view.findViewById(R.id.etNoteTitle);
         etNoteMemo = view.findViewById(R.id.etNoteMemo);
         tvDateTime = view.findViewById(R.id.tvNoteDateTime);
     }
@@ -92,31 +142,32 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
     private void initListeners() {
     }
 
-    private void addToEditText() {
+    private void addToEditText(Cursor cursor) {
         if(isNewNote()) {
             clearTexts();
             return;
         }
         cursor.moveToFirst();
-        String name = cursor.getString(cursor.getColumnIndex(DatabaseHelper.ITEM_TITLE));
-        etNoteName.setText(name);
-
+        String title = cursor.getString(cursor.getColumnIndex(DatabaseHelper.ITEM_TITLE));
         String memo = cursor.getString(cursor.getColumnIndex(DatabaseHelper.ITEM_MEMO));
-        etNoteMemo.setText(memo);
-
         String dt = cursor.getString(cursor.getColumnIndex(DatabaseHelper.ITEM_DATE_TIME));
-        tvDateTime.setText(dt);
+        addToEditText(title, memo, dt);
+    }
 
+    private void addToEditText(String title, String memo, String dt) {
+        etNoteTitle.setText(title);
+        etNoteMemo.setText(memo);
+        tvDateTime.setText(dt);
     }
 
     private void clearTexts() {
-        etNoteName.setText("");
+        etNoteTitle.setText("");
         etNoteMemo.setText("");
         tvDateTime.setText("");
     }
 
     public void saveNote() {
-        String name = etNoteName.getText().toString();
+        String name = etNoteTitle.getText().toString();
         String memo = etNoteMemo.getText().toString();
 
         if(isEditNote()) {

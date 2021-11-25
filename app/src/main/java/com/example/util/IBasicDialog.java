@@ -1,10 +1,12 @@
-package com.example.hw40_notebook;
+package com.example.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.example.hw40_notebook.R;
 
 public interface IBasicDialog {
 

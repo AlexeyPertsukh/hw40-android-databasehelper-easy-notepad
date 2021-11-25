@@ -1,4 +1,4 @@
-package com.example.hw40_notebook;
+package com.example.util;
 
 import android.util.Log;
 

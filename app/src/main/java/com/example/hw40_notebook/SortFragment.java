@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
+import com.example.util.ILog;
+import com.example.util.IToast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -19,7 +22,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class SortFragment extends Fragment implements Serializable, IConst, IToast {
+public class SortFragment extends Fragment implements Serializable, IConst, IToast, ILog {
 
     private RadioButton rbSortOrderNew;
     private RadioButton rbSortOrderOld;
@@ -49,6 +52,7 @@ public class SortFragment extends Fragment implements Serializable, IConst, IToa
         super.onCreate(savedInstanceState);
         mapRbSort = new HashMap<>();
         mapSortRb = new HashMap<>();
+        printLog("SortFragment - Create");
     }
 
     @Override
@@ -62,6 +66,7 @@ public class SortFragment extends Fragment implements Serializable, IConst, IToa
             setRbCheck();
         }
         initListeners();
+        printLog("SortFragment - CreateView");
         return view;
     }
 

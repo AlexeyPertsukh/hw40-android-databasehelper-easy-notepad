@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.util.ILog;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -122,7 +124,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
         return db.rawQuery(query, null);
     }
 
-    public enum FILTER {
+    public enum FILTER implements Serializable {
         NONE(""),
         MONTH("WHERE " + ITEM_DATE_TIME + " > date('now','-1 month')"),
         WEEK("WHERE " + ITEM_DATE_TIME + " > date('now','-7 day')"),
@@ -140,7 +142,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable, IL
         }
     }
 
-    public enum SORT {
+    public enum SORT  implements Serializable {
         EDIT_OLD("ORDER BY " + ITEM_DATE_TIME + " ASC"),
         EDIT_NEW("ORDER BY " + ITEM_DATE_TIME + " DESC"),
         ORDER_OLD("ORDER BY " + ITEM_ID + " ASC"),

@@ -18,6 +18,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.util.IBasicDialog;
+import com.example.util.ILog;
+import com.example.util.IToast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -45,10 +49,10 @@ public class ItemsFragment extends Fragment implements Serializable, IToast, IBa
         iGit = (IGit) context;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        printLog("ItemsFragment - Create");
     }
 
     @Override
@@ -70,6 +74,7 @@ public class ItemsFragment extends Fragment implements Serializable, IToast, IBa
         }
 
         setHasOptionsMenu(true);
+        printLog("ItemsFragment - CreateView");
         return view;
     }
 

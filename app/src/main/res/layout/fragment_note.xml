@@ -7,7 +7,7 @@
     >
 
     <EditText
-        android:id="@+id/etNoteName"
+        android:id="@+id/etNoteTitle"
         android:hint="Title"
         style="@style/StyleMainEditText"
         android:inputType="textPersonName"

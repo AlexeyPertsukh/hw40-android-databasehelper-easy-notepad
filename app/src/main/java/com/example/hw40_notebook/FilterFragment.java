@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
+import com.example.util.ILog;
+import com.example.util.IToast;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -20,7 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class FilterFragment extends Fragment implements Serializable, IConst, IToast {
+public class FilterFragment extends Fragment implements Serializable, IConst, IToast, ILog {
     private RadioButton rbFilterNone;
     private RadioButton rbFilterMonth;
     private RadioButton rbFilterWeek;
@@ -33,13 +36,13 @@ public class FilterFragment extends Fragment implements Serializable, IConst, IT
 
     private IChangeFragment iChangeFragment;
 
+    public FilterFragment() {
+    }
+
     @Override
     public void onAttach(@NonNull @NotNull Context context) {
         super.onAttach(context);
         iChangeFragment = (IChangeFragment) context;
-    }
-
-    public FilterFragment() {
     }
 
     @Override
@@ -47,6 +50,7 @@ public class FilterFragment extends Fragment implements Serializable, IConst, IT
         super.onCreate(savedInstanceState);
         mapRbFilter = new HashMap<>();
         mapIntFilter = new HashMap<>();
+        printLog("FilterFragment - Create");
     }
 
     @Override
@@ -60,6 +64,7 @@ public class FilterFragment extends Fragment implements Serializable, IConst, IT
             setRbCheck();
         }
         initListeners();
+        printLog("FilterFragment - CreateView");
         return view;
     }
 

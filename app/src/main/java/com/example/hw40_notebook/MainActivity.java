@@ -3,12 +3,18 @@ package com.example.hw40_notebook;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.FragmentManager;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.util.IBasicDialog;
+import com.example.util.ILog;
+import com.example.util.IToast;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,12 +34,22 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        boolean recovery = false;
         changeStatusBarColor();
+        if (savedInstanceState != null) {
+            printLog("MainActivity - read savedInstanceState");
+            recovery = true;
+        }
         initViews();
         initSharedPreferences();
         initDatabaseHelper();
         initFragments();
-        showItemsFragment();
+
+        if (!recovery) {
+            showItemsFragment();
+        }
+
+        printLog("MainActivity - Create");
     }
 
     private void changeStatusBarColor() {
@@ -62,6 +78,13 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("message", "recovery");
+        printLog("MainActivity - onSaveInstanceState");
+    }
+
+    @Override
     public void
     showItemsFragment() {
         Bundle args = new Bundle();
@@ -85,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
                 .beginTransaction()
                 .replace(R.id.fcMain, noteFragment)
                 .commit();
+
     }
 
     @Override
@@ -120,9 +144,9 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.menu_back) {
+        if (id == R.id.menu_back) {
             back();
-        } else if(id == R.id.menu_git) {
+        } else if (id == R.id.menu_git) {
             gitOpen();
         }
         return super.onOptionsItemSelected(item);
@@ -155,12 +179,12 @@ public class MainActivity extends AppCompatActivity implements IChangeFragment, 
     }
 
     private DatabaseHelper.SORT readSortFromShared() {
-        String name = mySharedPreferences.getString(SHARED_SORT_NAME,DatabaseHelper.DEFAULT_SORT.name());
+        String name = mySharedPreferences.getString(SHARED_SORT_NAME, DatabaseHelper.DEFAULT_SORT.name());
         return DatabaseHelper.SORT.valueOf(name);
     }
 
     private DatabaseHelper.FILTER readFilterFromShared() {
-        String name = mySharedPreferences.getString(SHARED_FILTER_NAME,DatabaseHelper.DEFAULT_FILTER.name());
+        String name = mySharedPreferences.getString(SHARED_FILTER_NAME, DatabaseHelper.DEFAULT_FILTER.name());
         return DatabaseHelper.FILTER.valueOf(name);
     }
 
