@@ -1,6 +1,8 @@
 package com.example.model;
 
-public class Note {
+import java.io.Serializable;
+
+public class Note implements Serializable {
     public String title;
     public String memo;
     public String dt;
