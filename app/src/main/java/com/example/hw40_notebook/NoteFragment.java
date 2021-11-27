@@ -67,7 +67,7 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        printLog("NoteFragment - Create: " + toString());
+        printLog("NoteFragment - Create");
     }
 
     @Override
@@ -101,7 +101,6 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
     }
 
     private void loadFromBundle(Bundle bundle) {
-        printLog("NoteFragment - read savedInstanceState: title = " + bundle.getString("title"));
         databaseHelper = (DatabaseHelper) bundle.getSerializable(KEY_DATABASE_HELPER);
         assert databaseHelper != null;
         database = databaseHelper.getWritableDatabase();
@@ -120,20 +119,16 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
         int memoSelectStart = bundle.getInt(KEY_MEMO_SELECT_START);
         int memoSelectEnd = bundle.getInt(KEY_MEMO_SELECT_END);
 
-        EditText et = null;
-        if(titleSelectStart != 0) {
-            et = etNoteTitle;
-        } else if(memoSelectStart != 0) {
-            et = etNoteMemo;
-        }
-
-        if(et != null) {
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        if(titleSelectStart > 0 || memoSelectStart > 0) {
+            openKeyboard();
         }
 
         etNoteTitle.setSelection(titleSelectStart, titleSelectEnd);
         etNoteMemo.setSelection(memoSelectStart, memoSelectEnd);
+    }
 
+    public void openKeyboard() {
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 
     @Override
@@ -151,7 +146,9 @@ public class NoteFragment extends Fragment implements Serializable, IToast, IBas
         outState.putInt(KEY_MEMO_SELECT_START, etNoteMemo.getSelectionStart());
         outState.putInt(KEY_MEMO_SELECT_END, etNoteMemo.getSelectionEnd());
 
-        printLog("noteFragment - onSaveInstanceState");
+        printLog("title select: " + etNoteTitle.getSelectionStart() + " - " + etNoteTitle.getSelectionEnd());
+        printLog("memo select: " + etNoteMemo.getSelectionStart() + " - " + etNoteMemo.getSelectionEnd());
+
     }
 
     private void initView(View view) {
